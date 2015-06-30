@@ -2,7 +2,7 @@
 //
 //  This file is part of RTIMULib
 //
-//  Copyright (c) 2014-2015, richards-tech, LLC
+//  Copyright (c) 2014-2015, richards-tech
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy of
 //  this software and associated documentation files (the "Software"), to deal in
@@ -127,12 +127,17 @@ public:
     RTQuaternion& operator *=(const RTQuaternion& qb);
     RTQuaternion& operator *=(const RTFLOAT val);
     RTQuaternion& operator -=(const RTFLOAT val);
+    RTQuaternion& operator /=(const RTFLOAT val);
 
     RTQuaternion& operator =(const RTQuaternion& quat);
     const RTQuaternion operator *(const RTQuaternion& qb) const;
     const RTQuaternion operator *(const RTFLOAT val) const;
     const RTQuaternion operator -(const RTQuaternion& qb) const;
     const RTQuaternion operator -(const RTFLOAT val) const;
+
+    RTFLOAT norm();
+    RTFLOAT norm2();
+    RTQuaternion inverse() const;
 
     void normalize();
     void toEuler(RTVector3& vec);

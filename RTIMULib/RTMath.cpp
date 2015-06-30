@@ -2,7 +2,7 @@
 //
 //  This file is part of RTIMULib
 //
-//  Copyright (c) 2014-2015, richards-tech, LLC
+//  Copyright (c) 2014-2015, richards-tech
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy of
 //  this software and associated documentation files (the "Software"), to deal in
@@ -320,6 +320,13 @@ RTQuaternion& RTQuaternion::operator *=(const RTQuaternion& qb)
     return *this;
 }
 
+RTQuaternion& RTQuaternion::operator /=(const RTFLOAT val)
+{
+    for (int i = 0; i < 4; i++)
+        m_data[i] /= val;
+    return *this;
+}
+
 
 RTQuaternion& RTQuaternion::operator *=(const RTFLOAT val)
 {
@@ -368,10 +375,19 @@ void RTQuaternion::zero()
         m_data[i] = 0;
 }
 
+RTFLOAT RTQuaternion::norm2() {
+    RTFLOAT length = (m_data[0] * m_data[0] + m_data[1] * m_data[1] +
+            m_data[2] * m_data[2] + m_data[3] * m_data[3]);
+    return length;
+}
+
+RTFLOAT RTQuaternion::norm() {
+    return sqrt(norm2());
+}
+
 void RTQuaternion::normalize()
 {
-    RTFLOAT length = sqrt(m_data[0] * m_data[0] + m_data[1] * m_data[1] +
-            m_data[2] * m_data[2] + m_data[3] * m_data[3]);
+    RTFLOAT length = norm();
 
     if ((length == 0) || (length == 1))
         return;
@@ -409,6 +425,13 @@ void RTQuaternion::fromEuler(RTVector3& vec)
     normalize();
 }
 
+RTQuaternion RTQuaternion::inverse() const
+{
+    RTQuaternion q = conjugate();
+    q /= q.norm2();
+    return q;
+}
+
 RTQuaternion RTQuaternion::conjugate() const
 {
     RTQuaternion q;
@@ -432,9 +455,10 @@ void RTQuaternion::toAngleVector(RTFLOAT& angle, RTVector3& vec)
         vec.setY(0);
         vec.setZ(0);
     } else {
-        vec.setX(m_data[1] / sinHalfTheta);
+        vec.setX(m_data[0] / sinHalfTheta);
         vec.setY(m_data[1] / sinHalfTheta);
-        vec.setZ(m_data[1] / sinHalfTheta);
+        vec.setZ(m_data[2] / sinHalfTheta);
+        vec.normalize();
     }
     angle = 2.0 * halfTheta;
 }
