@@ -99,7 +99,6 @@ OBJECTS = objects/RTIMULibCal.o \
     objects/RTIMUGD20M303DLHC.o \
     objects/RTIMUGD20HM303DLHC.o \
     objects/RTIMULSM9DS0.o \
-    objects/RTIMULSM9DS1.o \
     objects/RTIMUBMX055.o \
     objects/RTIMUBNO055.o \
     objects/RTPressure.o \
@@ -107,6 +106,7 @@ OBJECTS = objects/RTIMULibCal.o \
     objects/RTPressureLPS25H.o \
     objects/RTPressureMS5611.o \
     objects/RTPressureMS5637.o 
+#    objects/RTIMULSM9DS1.o \
 
 MAKE_TARGET	= RTIMULibCal
 DESTDIR		= Output/
