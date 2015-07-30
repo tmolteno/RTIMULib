@@ -24,8 +24,9 @@
 #ifndef _RTMATH_H_
 #define _RTMATH_H_
 
-#include "RTIMUHal.h"
-
+// #include "RTIMUHal.h"
+#include <cstring>
+#include <stdint.h>
 //  The fundamental float type
 
 #ifdef RTMATH_USE_DOUBLE
@@ -108,8 +109,8 @@ public:
     inline void setY(const RTFLOAT val) { m_data[1] = val; }
     inline void setZ(const RTFLOAT val) { m_data[2] = val; }
     inline void setData(const int i, RTFLOAT val) { m_data[i] = val; }
-    inline void fromArray(RTFLOAT *val) { memcpy(m_data, val, 3 * sizeof(RTFLOAT)); }
-    inline void toArray(RTFLOAT *val) const { memcpy(val, m_data, 3 * sizeof(RTFLOAT)); }
+    inline void fromArray(RTFLOAT *val) { std::memcpy(m_data, val, 3 * sizeof(RTFLOAT)); }
+    inline void toArray(RTFLOAT *val) const { std::memcpy(val, m_data, 3 * sizeof(RTFLOAT)); }
 
 private:
     RTFLOAT m_data[3];
@@ -160,8 +161,8 @@ public:
     inline void setY(const RTFLOAT val) { m_data[2] = val; }
     inline void setZ(const RTFLOAT val) { m_data[3] = val; }
     inline void setData(const int i, RTFLOAT val) { m_data[i] = val; }
-    inline void fromArray(RTFLOAT *val) { memcpy(m_data, val, 4 * sizeof(RTFLOAT)); }
-    inline void toArray(RTFLOAT *val) const { memcpy(val, m_data, 4 * sizeof(RTFLOAT)); }
+    inline void fromArray(RTFLOAT *val) { std::memcpy(m_data, val, 4 * sizeof(RTFLOAT)); }
+    inline void toArray(RTFLOAT *val) const { std::memcpy(val, m_data, 4 * sizeof(RTFLOAT)); }
 
 private:
     RTFLOAT m_data[4];

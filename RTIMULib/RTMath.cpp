@@ -26,6 +26,9 @@
 #ifdef WIN32
 #include <qdatetime.h>
 #endif
+#include <sys/time.h>  
+#include <math.h>
+#include <stdio.h>
 
 //  Strings are put here. So the display functions are no re-entrant!
 
